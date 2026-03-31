@@ -31,9 +31,11 @@ int main() {
     if (c == "push_front") {
       if (!(cin >> x)) return false;
       dq.push_front(x);
+      cout << "ok\n";
     } else if (c == "push_back") {
       if (!(cin >> x)) return false;
       dq.push_back(x);
+      cout << "ok\n";
     } else if (c == "pop_front") {
       if (dq.empty()) cout << "error\n";
       else { cout << dq.front() << "\n"; dq.pop_front(); }
@@ -53,6 +55,9 @@ int main() {
       cout << "ok\n";
     } else if (c == "empty") {
       cout << (dq.empty() ? "true" : "false") << "\n";
+    } else if (c == "exit") {
+      cout << "bye\n";
+      return false; // signal to stop
     } else if (c == "print") {
       // debug helper: print space-separated elements
       for (size_t i = 0; i < dq.size(); ++i) {
@@ -71,12 +76,11 @@ int main() {
   if (q >= 0) {
     for (int i = 0; i < q; ++i) {
       if (!(cin >> cmd)) break;
-      proc(cmd);
+      if (!proc(cmd)) break;
     }
   } else {
-    while (cin >> cmd) proc(cmd);
+    while (cin >> cmd) if (!proc(cmd)) break;
   }
 
   return 0;
 }
-
